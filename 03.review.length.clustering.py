@@ -17,15 +17,44 @@ with review_file as f:
 
 maxtrix_text_length = []
 
+print(len(data))
 # Extract the text from the data
 texts = [d['text'] for d in data]
-print(texts)
+#print(texts)
+print(len(texts))
+
+class Cluster:
+    def __init__(self, cluster):
+        self.cluster = []
+        self.cluster.append(cluster)
+
+    def __repr__(self):
+        return str(self.cluster)
+
+    def getClusterDistance(self, cluster, dist = 0):
+        cluster1 = self.cluster
+        cluster2 = cluster.cluster
+        dist1 = 0
+        for i in cluster1:
+            for j in cluster2:
+                
+                if i != j:
+                    dist1 = abs(i - j)
+                    if dist1 < dist:
+                        dist = dist1
+        return dist
 
 #calculate the distance between the text length
 for i in range(len(texts)):
     for j in range(len(texts)):
         if i != j:
             maxtrix_text_length.append(abs(len(texts[i]) - len(texts[j])))
+
+class Clusters:
+    def __init__(self, cluster):
+        self.cluster = []
+        self.cluster.append(cluster)
+        pass
 
 #find the max and min distance
 maxtrix_text_length = np.array(maxtrix_text_length)
